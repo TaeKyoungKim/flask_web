@@ -1,7 +1,36 @@
-from flask import Flask ,render_template
+from flask import Flask ,render_template , flash , redirect , url_for, session, request, logging
+from flask_mysqldb import MySQL
+import pymysql
 from data import Articles
+
 app = Flask(__name__)
 app.debug=True
+
+#config MySQL
+app.config['MYSQL_HOST']='localhost'
+app.config['MYSQL_USER']='root'
+app.config['MYSQL_PASSWORD']='1234'
+app.config['MYSQL_DB']='myflaskapp'
+app.config['MYSQL_CURSORCLASS']='DictCursor'
+
+db = pymysql.connect(host='localhost', 
+                        port=3306, 
+                        user='root', 
+                        passwd='1234', 
+                        db='myflaskapp')
+
+cursor = db.cursor()
+
+
+
+#init mysql 
+# mysql = MySQL(app)
+# cur  = mysql.connection.cursor()
+# result  = cur.execute("SELECT * FROM users;")
+
+# users  = cur.fetchall()
+# print(users)
+# print(result)
 
 @app.route('/')
 def index():
