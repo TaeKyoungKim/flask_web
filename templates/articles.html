@@ -4,31 +4,7 @@
     <h1 class="display-4">ARTICLES PAGE</h1>
     <p class="lead">This Application is build using by python and Flask Framework</p>
     <hr class="my-4">
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">title</th>
-            <th scope="col">description</th>
-            <th scope="col">author</th>
-            <th scope="col">DATE</th>
-            <th scope="col">EDIT</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for article in articles %}
-          <tr>
-            <th scope="row">{{ article['id'] }}</th>
-            <td>{{ article['title'] }}</td>
-            <td>{{ article['body'] }}</td>
-            <td>{{ article['author'] }}</td>
-            <td>{{ article['create_date'] }}</td>
-            <td><button type="button" class="btn btn-danger">Edit</button></td>
-          </tr>
-           {% endfor %}
-        </tbody>
-      </table>
-      
+     
       <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
@@ -61,7 +37,7 @@
                       {% for article in articles %}
                         <tr>
                           <th scope="row">{{ article['id'] }}</th>
-                          <td>{{ article['title'] }}</td>
+                          <td><a href="/article/{{article['id']}}">{{ article['title'] }}</a></td>
                           <td>{{ article['body'] }}</td>
                           <td>{{ article['author'] }}</td>
                           <td>{{ article['create_date'] }}</td>

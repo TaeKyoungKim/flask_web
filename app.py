@@ -27,6 +27,11 @@ def articles():
 def show_image():
     return render_template('image.html')
 
+@app.route('/article/<int:id>')
+def article(id):
+    print(id)
+    return render_template('article.html')
+
 if __name__ =='__main__':
     # app.run(host='0.0.0.0', port='8080')
     app.run()
