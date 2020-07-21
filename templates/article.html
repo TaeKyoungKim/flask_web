@@ -1,0 +1,14 @@
+{% extends "layouts.html" %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        {{ data[0][data[1]-1]['author'] }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ data[0][data[1]-1]['title'] }}</h5>
+      <p class="card-text">{{ data[0][data[1]-1]['body'] }}</p>
+      <a href="/" class="btn btn-primary">Home</a>
+    </div>
+  </div>
+{% endblock %}
