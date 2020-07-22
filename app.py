@@ -14,9 +14,6 @@ db = pymysql.connect(host='localhost',
                         db='myflaskapp')
 
 
-
-
-
 #init mysql 
 # mysql = MySQL(app)
 # cur  = mysql.connection.cursor()
@@ -54,11 +51,11 @@ def register():
             cursor = db.cursor()
             sql = '''
                 INSERT INTO users (name , email , username , password) 
-                VALUES (%s ,%s,%s,%s )
+                VALUES (%s ,%s, %s, %s )
              '''
             cursor.execute(sql , (name,email,username,password ))
             db.commit()
-            db.close()
+            
 
             # cursor = db.cursor()
             # cursor.execute('SELECT * FROM users;')
@@ -68,8 +65,10 @@ def register():
 
         else:
             return "Invalid Password"
+
+        db.close()
     else:
-        return "GET Success"
+        return render_template('register.html')
 
 
 
