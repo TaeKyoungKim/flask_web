@@ -9,7 +9,7 @@
       <h5 class="card-title"><i class="icon-copy ion-ios-paper"></i> 제목 : {{ data[1] }}</h5>
       <p class="card-text"><h5><i class="icon-copy ion-ios-paper"></i> 내용</h5>{{ data[2] }}</p>
       <a href="/articles" class="btn btn-primary">BACK</a>
-      <a href="/edit_article" class="btn btn-danger">EDIT</a>
+      <a href="/article/{{ data[0] }}/edit_article" class="btn btn-danger">EDIT</a>
     </div>
   </div>
 {% endblock %}

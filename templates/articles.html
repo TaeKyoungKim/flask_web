@@ -19,7 +19,7 @@
                           <th>Description</th>
                           <th>Author</th>
                           <th>DATE</th>
-                          <th>EDIT</th>
+                          <th>DELETE</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -29,7 +29,7 @@
                           <th>Description</th>
                           <th>Author</th>
                           <th>DATE</th>
-                          <th>EDIT</th>
+                          <th>DELETE</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -40,14 +40,15 @@
                         <td>{{ article[2] }}</td>
                         <td>{{ article[3] }}</td>
                         <td>{{ article[4] }}</td>
-                        <td><button type="button" class="btn btn-danger">Edit</button></td>
+                        <td><form action="/delete/{{article[0]}}" method="POST" onsubmit="return confirm('정말 삭제하시겠습니까?')"><button type="submit" class="btn btn-danger">DELET</button></form></td>
                       </tr>
                         {% endfor %}
                     </tbody>
                   </table>
+                  <a href="/add_articles" class="btn btn-primary">새글작성</a>
                 </div>
               </div>
             </div>
-    <a class="btn btn-warning btn-lg" href="#" role="button">Learn more</a>
+          <hr>
   </div>
 {% endblock %}
