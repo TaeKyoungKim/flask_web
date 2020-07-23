@@ -62,7 +62,7 @@ def register():
             # cursor.execute('SELECT * FROM users;')
             # users = cursor.fetchall()
             
-            return "register Success"
+            return redirect(url_for('login'))
 
         else:
             return "Invalid Password"
@@ -75,9 +75,9 @@ def register():
 @app.route('/login',methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        id = request.form.get('email')
+        id = request.form['email']
         pw = request.form.get('password')
-        # print([id , pw])
+        print([id])
 
         sql='SELECT * FROM users WHERE email = %s'
         cursor  = db.cursor()
@@ -93,29 +93,50 @@ def login():
             else:
                 return redirect(url_for('login'))
         
-        # return "Success"
     else:
         return render_template('login.html')
 
-@app.route('/articles', methods=['GET','POST'])
+@app.route('/articles')
 def articles():
-    print("Success")
-    # return "TEST"
-    articles = Articles()
-    print(len(articles))
-    return render_template('articles.html',articles=articles)
+    # data = Articles()
+    # print(len(articles))
+    cursor = db.cursor()
+    sql='SELECT * FROM topic;'
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    print(data)
+    return render_template('articles.html',articles=data)
+    # return "GET Success"
 
-@app.route('/test')
-def show_image():
-    return render_template('image.html')
 
 @app.route('/article/<int:id>')
 def article(id):
-    print(id)
+    print(type(id))
     articles= Articles()[id-1]
-    print(articles)
+    # print(articles)
     return render_template('article.html',data =articles)
     # return "Success"
+
+@app.route('/add_articles',methods=['GET','POST'])
+def add_articles():
+    if request.method == 'POST':
+        # print(request.form['title'])
+        title = request.form['title']
+        body = request.form['body']
+        author = request.form['author']
+        cursor = db.cursor()
+        sql = '''
+            INSERT INTO topic (title, body , author)
+            VALUES (%s ,%s ,%s)
+        '''
+        cursor.execute(sql,(title, body , author))
+        db.commit()
+        
+        return redirect("/articles")
+    else:
+        return render_template('add_articles.html')
+
+    db.close()
 
 if __name__ =='__main__':
     # app.run(host='0.0.0.0', port='8080')
