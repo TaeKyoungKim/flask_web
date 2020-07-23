@@ -109,13 +109,17 @@ def articles():
     # return "GET Success"
 
 
-@app.route('/article/<int:id>')
+@app.route('/article/<string:id>')
 def article(id):
-    print(type(id))
-    articles= Articles()[id-1]
-    # print(articles)
-    return render_template('article.html',data =articles)
-    # return "Success"
+    # print(type(id))
+    # articles= Articles()[id-1]
+    cursor = db.cursor()
+    sql = 'SELECT * FROM topic WHERE id= %s;'
+    cursor.execute(sql, [id])
+    topic = cursor.fetchone()
+    print(topic)
+    return render_template('article.html',data =topic)
+    
 
 @app.route('/add_articles',methods=['GET','POST'])
 def add_articles():
