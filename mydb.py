@@ -92,6 +92,7 @@ sql_6='UPDATE `users` SET `name`="PARK" WHERE  `id`=6;'
 
 sql_8 = 'SELECT * FROM topic;'
 
-cursor.execute(sql_8)
-topics = cursor.fetchall()
-print(topics)
+if __name__ == '__main__':
+    cursor.execute(sql_8)
+    topics = cursor.fetchall()
+    print(topics)
