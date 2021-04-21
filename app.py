@@ -283,9 +283,9 @@ def delete(id):
     return redirect(url_for('articles'))
 
 if __name__ =='__main__':
-    # app.run(host='0.0.0.0', port='8080')
+    app.run(host='0.0.0.0', port='8080')
     # ssession 실행시 필요한 설정
     app.secret_key = 'secretKey123456789'
     #서버실행
-    app.run()
+    # app.run()
     

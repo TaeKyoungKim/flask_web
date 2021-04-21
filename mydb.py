@@ -5,7 +5,7 @@ db = pymysql.connect(
     port=3306, 
     user='root', 
     passwd='1234', 
-    db='myflaskapp')
+    db='busan')
 cursor = db.cursor()
 # sql = ''' 
 #         CREATE TABLE users(
