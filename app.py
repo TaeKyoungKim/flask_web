@@ -1,7 +1,7 @@
 from flask import Flask ,render_template , flash , redirect , url_for, session, request, logging
 
 import pymysql
-from passlib.hash import pbkdf2_sha256
+from passlib.hash import sha256_crypt
 from data import Articles
 from functools import wraps
 
@@ -13,7 +13,7 @@ db = pymysql.connect(host='localhost',
                         port=3306, 
                         user='root', 
                         passwd='1234', 
-                        db='myflaskapp')
+                        db='busan')
 
 
 #init mysql 
@@ -62,7 +62,7 @@ def register():
         # data = request.body.get('author')
         name = request.form.get('name')
         email = request.form.get('email')
-        password = pbkdf2_sha256.hash(request.form.get('password'))
+        password = sha256_crypt.hash(request.form.get('password'))
         re_password = request.form.get('re_password')
         username = request.form.get('username')
         # name = form.name.data
@@ -74,8 +74,8 @@ def register():
             return redirect(url_for('register'))
         else:
 
-            if(pbkdf2_sha256.verify(re_password,password )):
-                print(pbkdf2_sha256.verify(re_password,password ))
+            if(sha256_crypt.verify(re_password,password )):
+                print(sha256_crypt.verify(re_password,password ))
                 
                 sql = '''
                     INSERT INTO users (name , email , username , password) 
@@ -116,7 +116,7 @@ def login():
         if users ==None:
             return redirect(url_for('login'))
         else:
-            if pbkdf2_sha256.verify(pw,users[4] ):
+            if sha256_crypt.verify(pw,users[4] ):
                 session['is_logged'] = True
                 session['username'] = users[3]
                 print(session)
